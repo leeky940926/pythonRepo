@@ -12,24 +12,39 @@ school_info = school_info["schoolInfo"][1]
 school_info = school_info["row"][0]
 
 #학교시간표
-school_info_url = f"https://open.neis.go.kr/hub/classInfo?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7569019"
+school_info_url = f"https://open.neis.go.kr/hub/elsTimetable?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7569019"
 
 timetables = requests.get(url=school_info_url)
 timetables = timetables.json()
-timetables = timetables["classInfo"][1]
+timetables = timetables["elsTimetable"][1]
 timetables = timetables["row"]
 
-data = dict()
+official_education_code = timetables[0]["ATPT_OFCDC_SC_CODE"]
+official_education_name = timetables[0]["ATPT_OFCDC_SC_NM"]
+school_code = timetables[0]["SD_SCHUL_CODE"]
+school_name = timetables[0]["SCHUL_NM"]
+year = timetables[0]["AY"]
+
 data_list = []
 
-# for timetable in timetables:
-#     data_list.append(    
-#         {data["office_education_code"] = timetable["ATPT_OFCDC_SC_CODE"]
-#         data["office_education_name"] = timetable["ATPT_OFCDC_SC_NM"]
-#         data["school_code"] = timetable["SD_SCHUL_CODE"]
-#         data["school_name"] = timetable["SCHUL_NM"]
-#         data["year"] = timetable["AY"]
-#         data["grade"] = timetable["GRADE"]
-#         data["class"] = timetable["CLASS_NM"]}
-)
+for timetable in timetables:
+    data_list.append(
+        {
+            "semester" : timetable["SEM"],
+            "grade" : timetable["GRADE"],
+            "class" : timetable["CLASS_NM"],
+            "perio" : timetable["PERIO"],
+            "subject" : timetable["ITRT_CNTNT"]
+        }
+    )
+
+data = {
+    "official_education_code" : official_education_code,
+    "official_education_name" : official_education_name,
+    "school_code" : school_code,
+    "school_name" : school_name,
+    "year" : year,
+    "timetables" : data_list   
+}
+
 print(data)
