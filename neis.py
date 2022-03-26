@@ -25,14 +25,14 @@ school_name = timetables[0]["SCHUL_NM"]
 year = timetables[0]["AY"]
 
 data_list = [
-        {
-            "semester" : timetable["SEM"],
-            "grade" : timetable["GRADE"],
-            "class" : timetable["CLASS_NM"],
-            "perio" : timetable["PERIO"],
-            "subject" : timetable["ITRT_CNTNT"]
-        } for timetable in timetables
-    ]
+    {
+        "semester" : timetable["SEM"],
+        "grade" : timetable["GRADE"],
+        "class" : timetable["CLASS_NM"],
+        "perio" : timetable["PERIO"],
+        "subject" : timetable["ITRT_CNTNT"]
+    } for timetable in timetables
+]
 
 data = {
     "official_education_code" : official_education_code,
