@@ -1,4 +1,3 @@
-from time import time
 import requests
 
 API_KEY = "58903d98c8914f0d99132381ce09ec06"
@@ -25,18 +24,15 @@ school_code = timetables[0]["SD_SCHUL_CODE"]
 school_name = timetables[0]["SCHUL_NM"]
 year = timetables[0]["AY"]
 
-data_list = []
-
-for timetable in timetables:
-    data_list.append(
+data_list = [
         {
             "semester" : timetable["SEM"],
             "grade" : timetable["GRADE"],
             "class" : timetable["CLASS_NM"],
             "perio" : timetable["PERIO"],
             "subject" : timetable["ITRT_CNTNT"]
-        }
-    )
+        } for timetable in timetables
+    ]
 
 data = {
     "official_education_code" : official_education_code,
