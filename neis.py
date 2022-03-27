@@ -43,4 +43,17 @@ data = {
     "timetables" : data_list   
 }
 
-print(data)
+#급식 
+meal_url = f"https://open.neis.go.kr/hub/mealServiceDietInfo?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7569019"
+
+meals = requests.get(url=meal_url)
+meals = meals.json()["mealServiceDietInfo"][1]
+meals = meals["row"]
+meals = [
+    {
+        "meal_name" : meal["DDISH_NM"],
+        "origin" : meal["ORPLC_INFO"],
+        "calories" : meal["CAL_INFO"],
+        "nut_info" : meal["NTR_INFO"]
+    } for meal in meals]
+
