@@ -1,15 +1,15 @@
-import heapq 
+import heapq as h
 
 heap = []
 
-heapq.heappush(heap, 1)
-heapq.heappush(heap, 2)
-heapq.heappush(heap, 3)
+h.heappush(heap, 1)
+h.heappush(heap, 2)
+h.heappush(heap, 3)
 
-heapq.heappop()
+h.heappop()
 
-heapq.heappushpop(9)
+h.heappushpop(9)
 
-heapq.heapreplace(heap, 4)
+h.heapreplace(heap, 4)
 
-heapq.heapify(heap)
+h.heapify(heap)
