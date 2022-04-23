@@ -1,9 +1,9 @@
 import requests
 
-API_KEY = "58903d98c8914f0d99132381ce09ec06"
+API_KEY = "c2334e6f466c4dbbb235f4d05e9a88e0"
 
 #학교정보
-school_info_url = f"https://open.neis.go.kr/hub/schoolInfo?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7569019"
+school_info_url = f"https://open.neis.go.kr/hub/schoolInfo?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7130271"
 
 school_info = requests.get(url=school_info_url)
 school_info = school_info.json()
@@ -11,11 +11,11 @@ school_info = school_info["schoolInfo"][1]
 school_info = school_info["row"][0]
 
 #학교시간표
-school_info_url = f"https://open.neis.go.kr/hub/elsTimetable?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7569019"
+school_info_url = f"https://open.neis.go.kr/hub/misTimetable?KEY={API_KEY}&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7130271"
 
 timetables = requests.get(url=school_info_url)
 timetables = timetables.json()
-timetables = timetables["elsTimetable"][1]
+timetables = timetables["misTimetable"][1]
 timetables = timetables["row"]
 
 official_education_code = timetables[0]["ATPT_OFCDC_SC_CODE"]
